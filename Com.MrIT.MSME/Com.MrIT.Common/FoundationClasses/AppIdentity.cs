@@ -24,11 +24,6 @@ namespace Com.MrIT.Common.FoundationClasses
             set;
         }
 
-        public string InstituteSiteUrl
-        {
-            get;
-            set;
-        }
         public string PublicSiteUrl
         {
             get;

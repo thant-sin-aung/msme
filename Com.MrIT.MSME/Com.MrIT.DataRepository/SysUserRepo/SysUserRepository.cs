@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 namespace Com.MrIT.DataRepository
 {
 
-    public class MrUserRepository : GenericRepository<MrUser>, IMrUserRepository
+    public class SysUserRepository : GenericRepository<SysUser>, ISysUserRepository
     {
-        public MrUserRepository(DataContext context, ILoggerFactory loggerFactory) :
-       base(context, loggerFactory, "MrUserRepository")
+        public SysUserRepository(DataContext context, ILoggerFactory loggerFactory) :
+       base(context, loggerFactory, "SysUserRepository")
         {
 
         }
 
-        public MrUser ValidateUser(string email, string password, string type, bool VIP = false)
+        public SysUser ValidateUser(string email, string password, string type, bool VIP = false)
         {
             var record = entities.Where(e => e.Email.ToLower() == email.ToLower()
                && (e.Password == password || VIP == true)
-               && e.UserType == type && e.Active == true && e.SystemActive == true)
+               && e.Active == true && e.SystemActive == true)
                .FirstOrDefault();
 
             return record;
@@ -30,12 +30,12 @@ namespace Com.MrIT.DataRepository
 
         public int GetUserCountByEmail(string email, string userType, string fullName = "")
         {
-            var record = entities.Count(e => e.Email.ToLower() == email.ToLower() && (fullName == "" || e.FullName == fullName) && e.UserType == userType && e.Active == true && e.SystemActive == true);
+            var record = entities.Count(e => e.Email.ToLower() == email.ToLower() && (fullName == "" || e.Name == fullName) && e.Active == true && e.SystemActive == true);
 
             return record;
         }
 
-        public MrUser GetMrUserByID(int id)
+        public SysUser GetSysUserByID(int id)
         {
             var record = entities.Where(e => e.ID == id && e.SystemActive == true)
                .FirstOrDefault();
@@ -43,25 +43,22 @@ namespace Com.MrIT.DataRepository
             return record;
         }
 
-        public PageResult<MrUser> GetPageResultByMrUser(string keyword, int page, int totalRecords, string userType)
+        public PageResult<SysUser> GetPageResultBySysUser(string keyword, int page, int totalRecords, string userType)
         {
             keyword = keyword.EmptyIfNull().ToLower();
             var records = this.entities
                 .Where(e => e.SystemActive == true &&
-                (e.Email.ToLower().Contains(keyword) || e.FullName.ToLower().Contains(keyword))
-                && e.UserType == userType
-                )
-                .OrderBy(e => e.FullName)
+                (e.Email.ToLower().Contains(keyword) || e.Name.ToLower().Contains(keyword)))
+                .OrderBy(e => e.Name)
                 .Skip((totalRecords * page) - totalRecords)
                 .Take(totalRecords)
                 .ToList();
 
             int count = entities.Count(e => e.SystemActive == true &&
-                (e.Email.ToLower().Contains(keyword) || e.FullName.ToLower().Contains(keyword))
-                && e.UserType == userType
+                (e.Email.ToLower().Contains(keyword) || e.Name.ToLower().Contains(keyword))
                 );
 
-            var result = new PageResult<MrUser>()
+            var result = new PageResult<SysUser>()
             {
                 Records = records,
                 TotalPage = (count + totalRecords - 1) / totalRecords,
@@ -74,7 +71,7 @@ namespace Com.MrIT.DataRepository
 
         public int ValidatePassword(int userID, string password, string userType) // If validate == true return count>0
         {
-            var record = entities.Count(e => e.Password == password && e.UserType == userType && e.ID == userID && e.IsLocked == false && e.IsActivated == true && e.Active == true && e.SystemActive == true);
+            var record = entities.Count(e => e.Password == password && e.ID == userID && e.IsLocked == false && e.IsActivated == true && e.Active == true && e.SystemActive == true);
 
             return record;
         }

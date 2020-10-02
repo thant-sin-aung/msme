@@ -9,6 +9,6 @@ namespace Com.MrIT.DataRepository
 {
     public interface IEmailTemplateRepository : IGenericRepository<EmailTemplate>
     {
-
+        EmailTemplate GetByName(string name);
     }
 }

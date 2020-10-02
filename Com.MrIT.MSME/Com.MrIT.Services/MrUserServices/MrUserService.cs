@@ -11,11 +11,11 @@ namespace Com.MrIT.Services
 {
     public class MrUserService : BaseService, IMrUserService
     {
-        private readonly IMrUserRepository _repoMrUser;
+        private readonly ISysUserRepository _repoMrUser;
         private readonly ILoginLogRepository _repoLoginLog;
         private readonly AppSettings _appSettings;
 
-        public MrUserService(IMrUserRepository repoMrUser, ILoginLogRepository repoLoginLog,IOptions<AppSettings> appSettings)
+        public MrUserService(ISysUserRepository repoMrUser, ILoginLogRepository repoLoginLog,IOptions<AppSettings> appSettings)
         {
             this._repoMrUser = repoMrUser;
             this._repoLoginLog = repoLoginLog;
@@ -39,14 +39,14 @@ namespace Com.MrIT.Services
             {
                 // Record Login Log
                 var dbLoginLog = new LoginLog();
-                dbLoginLog.Username = dbresult.FullName;
+                dbLoginLog.Username = dbresult.Name;
                 dbLoginLog.Browser = user.Browser;
                 dbLoginLog.IPAddress = user.IPAddress;
-                dbLoginLog.CreatedBy = dbLoginLog.ModifiedBy = dbresult.FullName;
+                dbLoginLog.CreatedBy = dbLoginLog.ModifiedBy = dbresult.Name;
                 //_repoLoginLog.Add(dbLoginLog);
 
                 var result = new VmMrUser();
-                Copy<MrUser, VmMrUser>(dbresult, result);
+                Copy<SysUser, VmMrUser>(dbresult, result);
 
                 if (result.ProfileImage != null)
                 {
@@ -90,7 +90,7 @@ namespace Com.MrIT.Services
             if (dbResult > 0)
             {
                 //Disable User
-                var user = _repoMrUser.GetMrUserByID(userID);
+                var user = _repoMrUser.GetSysUserByID(userID);
                 user.Active = false;
                 _repoMrUser.Update(user);
 
@@ -110,7 +110,7 @@ namespace Com.MrIT.Services
         {
             var result = new VmGenericServiceResult();
 
-            var dbUser = _repoMrUser.GetMrUserByID(userID);
+            var dbUser = _repoMrUser.GetSysUserByID(userID);
 
             if (dbUser.Password == Md5.Encrypt(currentPass))
             {
@@ -134,8 +134,8 @@ namespace Com.MrIT.Services
         {
             var result = new VmGenericServiceResult();
 
-            var dbMrUser = new MrUser();
-            Copy<VmMrUser, MrUser>(mrUser, dbMrUser);
+            var dbMrUser = new SysUser();
+            Copy<VmMrUser, SysUser>(mrUser, dbMrUser);
             var dbResult = _repoMrUser.Add(dbMrUser);
 
             result.IsSuccess = true;
@@ -148,8 +148,8 @@ namespace Com.MrIT.Services
         {
             var result = new VmGenericServiceResult();
 
-            var dbMrUser = new MrUser();
-            Copy<VmMrUser, MrUser>(mrUser, dbMrUser);
+            var dbMrUser = new SysUser();
+            Copy<VmMrUser, SysUser>(mrUser, dbMrUser);
             var dbResult = _repoMrUser.Update(dbMrUser);
 
             result.IsSuccess = true;
@@ -164,14 +164,14 @@ namespace Com.MrIT.Services
             result.Result = new PageResult<VmMrUser>();
             result.Result.Records = new List<VmMrUser>();
 
-            var dbResult = _repoMrUser.GetPageResultByMrUser(keyword, page, totalRecord, "S");
-            Copy<PageResult<MrUser>, PageResult<VmMrUser>>(dbResult, result.Result, new string[] { "Records" });
+            var dbResult = _repoMrUser.GetPageResultBySysUser(keyword, page, totalRecord, "S");
+            Copy<PageResult<SysUser>, PageResult<VmMrUser>>(dbResult, result.Result, new string[] { "Records" });
 
             foreach (var dbItem in dbResult.Records)
             {
                 var resultItem = new VmMrUser();
 
-                Copy<MrUser, VmMrUser>(dbItem, resultItem);
+                Copy<SysUser, VmMrUser>(dbItem, resultItem);
                 resultItem.EncryptId = Md5.Encrypt(resultItem.ID.ToString());
 
                 result.Result.Records.Add(resultItem);
@@ -190,9 +190,9 @@ namespace Com.MrIT.Services
             }
             else
             {
-                var dbMrUser = _repoMrUser.GetMrUserByID(id);
+                var dbMrUser = _repoMrUser.GetSysUserByID(id);
 
-                Copy<MrUser, VmMrUser>(dbMrUser, result);
+                Copy<SysUser, VmMrUser>(dbMrUser, result);
                 result.EncryptId = Md5.Encrypt(result.ID.ToString());
 
                 if (result.ProfileImage != null)

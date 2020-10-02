@@ -111,17 +111,48 @@ namespace Com.MrIT.AdminSite
         private void RegisterForDependencyInjection(IServiceCollection services)
         {
             //// Register for repository classes
-            //services.AddScoped<IBranchRepository, BranchRepository>();
-            services.AddScoped<IMrUserRepository, MrUserRepository>();
-            services.AddScoped<ILoginLogRepository, LoginLogRepository>();
+            services.AddScoped<IAnnualIncomeRangeRepository, AnnualIncomeRangeRepository>();
+            services.AddScoped<IApplicationPaymentRepository, ApplicationPaymentRepository>();
+            services.AddScoped<IApplicationPaymentRepository, ApplicationPaymentRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
             services.AddScoped<IEmailLogRepository, EmailLogRepository>();
-            services.AddScoped<IErrorLogRepository, ErrorLogRepository>();
             services.AddScoped<IEmailTemplateRepository, EmailTemplateRepository>();
+            services.AddScoped<IEmployeeRangeRepository, EmployeeRangeRepository>();
+            services.AddScoped<IEnterpriseAttachmentRepository, EnterpriseAttachmentRepository>();
+            services.AddScoped<IEnterpriseBarrierRepository, EnterpriseBarrierRepository>();
+            services.AddScoped<IEnterpriseCategoryRepository, EnterpriseCategoryRepository>();
+            services.AddScoped<IEnterpriseImproveSurveyRepository, EnterpriseImproveSurveyRepository>();
+            services.AddScoped<IEnterprisePermitRepository, EnterprisePermitRepository>();
+            services.AddScoped<IEnterpriseProfileRepository, EnterpriseProfileRepository>();
+            services.AddScoped<IEnterpriseRepository, EnterpriseRepository>();
+            services.AddScoped<IErrorLogRepository, ErrorLogRepository>();
+            services.AddScoped<IForeignBusinessConnectionRepository, ForeignBusinessConnectionRepository>();
+            services.AddScoped<IImproveSurveyTypeRepository, ImproveSurveyTypeRepository>();
+            services.AddScoped<IIsoTypeRepository, IsoTypeRepository>();
+            services.AddScoped<ILoginLogRepository, LoginLogRepository>();
+            services.AddScoped<INrcFirstRepository, NrcFirstRepository>();
+            services.AddScoped<INrcSecondRepository, NrcSecondRepository>();
+            services.AddScoped<INrcThirdRepository, NrcThirdRepository>();
+            services.AddScoped<IOwnerTypeRepository, OwnerTypeRepository>();
+            services.AddScoped<IPermitTypeRepository, PermitTypeRepository>();
+            services.AddScoped<ISectorRepository, SectorRepository>();
+            services.AddScoped<IStateRegionRepository, StateRegionRepository>();
+            services.AddScoped<ISubAgencyPermissionRepository, SubAgencyPermissionRepository>();
+            services.AddScoped<ISubAgencyRepository, SubAgencyRepository>();
+            services.AddScoped<ISysUserRepository, SysUserRepository>();
+            services.AddScoped<ITownshipRepository, TownshipRepository>();
+            services.AddScoped<IUserOtpRepository, UserOtpRepository>();
+            services.AddScoped<IWorkflowAssignmentRepository, WorkflowAssignmentRepository>();
+            services.AddScoped<IWorkflowAssignmentApproverRepository, WorkflowAssignmentApproverRepository>();
+
 
             //// Register for logic classes
-            //services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IMrUserService, MrUserService>();
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Com.MrIT.DataRepository
 {
-    public interface IMrUserRepository : IGenericRepository<MrUser>
+    public interface ISysUserRepository : IGenericRepository<SysUser>
     {
-        MrUser ValidateUser(string email, string password, string type, bool VIP = false);
+        SysUser ValidateUser(string email, string password, string type, bool VIP = false);
 
         int GetUserCountByEmail(string email, string userType, string fullName = "");
 
-        PageResult<MrUser> GetPageResultByMrUser(string keyword, int page, int totalRecords, string userType);
+        PageResult<SysUser> GetPageResultBySysUser(string keyword, int page, int totalRecords, string userType);
 
-        MrUser GetMrUserByID(int id);
+        SysUser GetSysUserByID(int id);
 
         int ValidatePassword(int userID, string password, string userType);
     }

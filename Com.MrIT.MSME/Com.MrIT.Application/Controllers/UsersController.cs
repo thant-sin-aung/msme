@@ -123,7 +123,7 @@ namespace Com.MrIT.PublicSite.Controllers
         public IActionResult Register(VmMrUser user)
         {          
             user.Email = user.Email.Trim();
-            var result = _svsUser.RegisterCustomer(user);
+            var result = _svsUser.AddMrUser(user);
             if (result.IsSuccess)
             {
                 var emailcontent = new VmRegistrationEmail();
@@ -245,7 +245,7 @@ namespace Com.MrIT.PublicSite.Controllers
                         user.Email = userInfo.Email;
                         user.Password = userInfo.Password;
                         user.FullName = userInfo.FullName;
-                        var result = _svsUser.RegisterCustomer(user);
+                        var result = _svsUser.AddMrUser(user);
                         if (!result.IsSuccess)
                         {
                             TempData["ErrorMessage"] = result.MessageToUser;
