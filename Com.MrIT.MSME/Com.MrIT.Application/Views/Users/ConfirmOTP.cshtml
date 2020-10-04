@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Confirm OTP";
+    Layout = "~/Views/Shared/_Layout_Public.cshtml";
+}
+
+<div class="register-box offset-md-4">
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Enter Code</p>
+            <p>We texted your phone +XX XXXXXX10‎. Please enter the code to sign in.</p>
+            <form id="myForm" asp-action="ConfirmOTP"  method="Post">
+                <div class="input-group mb-3 has-feedback">
+                    <input type="text" class="form-control" placeholder="OTP" required autofocus>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-code"></span>
+                        </div>
+                    </div>
+                </div>
+               
+
+                <div class="row">
+                    <div class="col-12">
+                        @{
+                            if (TempData["ErrorMessage"] != null)
+                            {
+                                <span class="text-danger"> @TempData["ErrorMessage"] </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="social-auth-links text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+
+            
+
+            <a href="@Url.Action("ConfirmOTP","Users")" class="text-center">Resend again?</a>
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
+

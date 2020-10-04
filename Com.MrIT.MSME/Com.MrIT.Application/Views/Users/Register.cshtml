@@ -1,35 +1,26 @@
-﻿@model Com.MrIT.ViewModels.VmMrUser
+﻿@model Com.MrIT.ViewModels.VmSysUser
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout_Public.cshtml";
 }
 
-<div class="register-box">
+<div class="register-box offset-md-4">
     <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">Register a new membership</p>
 
             <form id="myForm" asp-action="Register" method="POST">
                 <div class="input-group mb-3 has-feedback">
-                    <input type="text" asp-for="FullName" class="form-control" placeholder="Full name" required autofocus>
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Full name" required autofocus>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
-                <span asp-validation-for="FullName" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-danger"></span>
                 <div class="input-group mb-3">
-                    <input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
-                </div>
-                <span asp-validation-for="Email" class="text-danger"></span>
-                <div class="input-group mb-3">
-                    <input type="text" asp-for="MobileNo" class="form-control" placeholder="Mobile No.">
+                    <input type="text" name="PreNumber" value="+95" readonly class="form-control col-sm-3" style="width:40px;" /> <input type="text" asp-for="MobileNo" class="form-control col-sm-8" placeholder="Mobile No. (0998765432)" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-phone"></span>
@@ -38,22 +29,16 @@
                 </div>
                 <span asp-validation-for="MobileNo" class="text-danger"></span>
                 <div class="input-group mb-3">
-                    <input type="password" asp-for="Password" class="form-control" placeholder="Password" required>
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
-                <span asp-validation-for="Password" class="text-danger"></span>
-                <div class="input-group mb-3">
-                    <input type="password" id="ConfirmPassword" class="form-control" placeholder="Retype password" required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
-                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+
                 <div class="row">
                     <div class="col-12">
                         @{
@@ -75,18 +60,14 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block" onclick="FormSubmit();">Register</button>
+
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
             <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i>
-                    Sign up using Facebook
-                </a>
+                <button type="submit" class="btn btn-primary btn-block" onclick="FormSubmit();">Register</button>
             </div>
 
             <a href="@Url.Action("SignIn","Users")" class="text-center">I already have a membership</a>
@@ -101,36 +82,17 @@
 }
 
 <script>
-    function IsPasswordSame() {
-        return $('#Password').val() == $('#ConfirmPassword').val();
-    }
 
     function FormSubmit() {
         var email = $('#Email').val();
-        if (email == "") {
-            alert("Email is required!");
-        }
-        else if ( !IsPasswordSame() ) {
-            alert("Password do not match!.");
-            $('#ConfirmPassword').val('');
+        var mobileNo = $('#MobileNo').val();
+        if (mobileNo == "") {
+            alert("Mobile number is required!");
         }
         else {
-            var ajaxurl = '../Users/CheckEmailForRegister';
-            $.ajax({
-                url: ajaxurl,
-                data: { Email: email },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.IsSuccess) {
-                        $('#myForm').submit();
-                    } else {
-                        alert(response.MessageToUser);
-                    }
-                },
-                error: function (response) {
-                    alert(response)
-                }
-            });
+
+            $('#myForm').submit();
+
         }
     }
 </script>

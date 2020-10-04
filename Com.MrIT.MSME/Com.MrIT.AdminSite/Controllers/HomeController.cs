@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Com.MrIT.AdminSite.Models;
+using Com.MrIT.AdminSite.Filters;
 
 namespace Com.MrIT.AdminSite.Controllers
 {
+    [MrITActionFilter]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+       
+        public HomeController()
         {
-            _logger = logger;
+           
         }
 
         public IActionResult Index()

@@ -10,9 +10,9 @@ namespace Com.MrIT.Services
     {
         VmMrUser ValidateUser(VmMrUser user);
 
-        VmGenericServiceResult CheckEmailForRegister(string email, string userType, string fullName = "");
+        VmGenericServiceResult CheckUserForRegister(string email, string userType, string mobileNo);
 
-        VmGenericServiceResult AddMrUser(VmMrUser mrUser);
+        VmGenericServiceResult AddMrUser(VmSysUser mrUser, bool IsBusiness = false);
 
         VmGenericServiceResult UpdateMrUser(VmMrUser mrUser);
 

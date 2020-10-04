@@ -12,12 +12,14 @@ namespace Com.MrIT.Services
     public class MrUserService : BaseService, IMrUserService
     {
         private readonly ISysUserRepository _repoMrUser;
+        private readonly IUserOtpRepository _repoUserOTP;
         private readonly ILoginLogRepository _repoLoginLog;
         private readonly AppSettings _appSettings;
 
-        public MrUserService(ISysUserRepository repoMrUser, ILoginLogRepository repoLoginLog,IOptions<AppSettings> appSettings)
+        public MrUserService(ISysUserRepository repoMrUser, IUserOtpRepository repoUserOTP, ILoginLogRepository repoLoginLog, IOptions<AppSettings> appSettings)
         {
             this._repoMrUser = repoMrUser;
+            this._repoUserOTP = repoUserOTP;
             this._repoLoginLog = repoLoginLog;
             this._appSettings = appSettings.Value;
         }
@@ -56,26 +58,50 @@ namespace Com.MrIT.Services
                 {
                     result.strProfileImage = "";
                 }
-                
+
                 return result;
-            }        
+            }
         }
 
-        public VmGenericServiceResult CheckEmailForRegister(string email,  string userType, string fullName = "")
+        public VmGenericServiceResult CheckUserForRegister(string email, string userType, string mobileNo)
         {
             var result = new VmGenericServiceResult();
 
-            var dbResult = _repoMrUser.GetUserCountByEmail(email, userType, fullName);
+            if (email.EmptyIfNull().Trim() != "")
+            {
+                var dbResult = _repoMrUser.GetUserCountByEmail(email, userType);
 
-            if (dbResult > 0)
+                if (dbResult > 0)
+                {
+                    result.IsSuccess = false;
+                    result.MessageToUser = "Email already exists. ";
+                }
+                else
+                {
+                    result.IsSuccess = true;
+                    result.MessageToUser = "You can register with this email. ";
+                }
+            }
+            
+            var dbResultForMobile = _repoMrUser.GetUserCountByMobileNo(mobileNo, userType);
+
+            if (dbResultForMobile > 0)
             {
                 result.IsSuccess = false;
-                result.MessageToUser = "Email already exists.";
+                result.MessageToUser = result.MessageToUser + "Mobile number already exists.";
             }
             else
             {
-                result.IsSuccess = true;
-                result.MessageToUser = "You can register with this email.";
+                if (result.IsSuccess)
+                {
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.IsSuccess = false;
+                }
+                
+                result.MessageToUser = result.MessageToUser + "You can register with this mobile number.";
             }
 
             return result;
@@ -95,7 +121,7 @@ namespace Com.MrIT.Services
                 _repoMrUser.Update(user);
 
                 // send success
-                result.IsSuccess = true;             
+                result.IsSuccess = true;
             }
             else
             {
@@ -130,13 +156,30 @@ namespace Com.MrIT.Services
             return result;
         }
 
-        public VmGenericServiceResult AddMrUser(VmMrUser mrUser)
+        public VmGenericServiceResult AddMrUser(VmSysUser mrUser, bool IsBusiness = false)
         {
             var result = new VmGenericServiceResult();
 
             var dbMrUser = new SysUser();
-            Copy<VmMrUser, SysUser>(mrUser, dbMrUser);
+            dbMrUser.CreatedBy = dbMrUser.ModifiedBy = mrUser.Name;
+            Copy<VmSysUser, SysUser>(mrUser, dbMrUser);
             var dbResult = _repoMrUser.Add(dbMrUser);
+
+            if(IsBusiness && dbResult.ID > 0)
+            {
+                //save otp
+                Random generator = new Random();
+                String r = generator.Next(0, 999999).ToString("D6");
+
+                var dbUserOTP = new UserOtp();
+                dbUserOTP.SysUserId = dbResult.ID;
+                dbUserOTP.Code = r;
+                dbUserOTP.ExpiredOn = DateTime.Now.AddMinutes(5);
+                dbUserOTP.CreatedBy = dbUserOTP.ModifiedBy = dbResult.Name;
+                var dbOTPResult = _repoUserOTP.Add(dbUserOTP);
+
+                result.MessageToUser = r;
+            }
 
             result.IsSuccess = true;
             result.RequestId = dbResult.ID.ToString();
@@ -180,11 +223,11 @@ namespace Com.MrIT.Services
             return result;
         }
 
-        
+
         public VmMrUser GetMrUserByID(int id)
         {
             var result = new VmMrUser();
-            if(result == null)
+            if (result == null)
             {
                 return new VmMrUser();
             }
@@ -201,9 +244,9 @@ namespace Com.MrIT.Services
                 }
 
                 return result;
-            }         
+            }
         }
 
-       
+
     }
 }

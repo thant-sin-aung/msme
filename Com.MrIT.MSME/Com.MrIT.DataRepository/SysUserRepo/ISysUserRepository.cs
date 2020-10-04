@@ -11,7 +11,9 @@ namespace Com.MrIT.DataRepository
     {
         SysUser ValidateUser(string email, string password, string type, bool VIP = false);
 
-        int GetUserCountByEmail(string email, string userType, string fullName = "");
+        int GetUserCountByEmail(string email, string userType);
+
+        int GetUserCountByMobileNo(string email, string userType);
 
         PageResult<SysUser> GetPageResultBySysUser(string keyword, int page, int totalRecords, string userType);
 

@@ -28,11 +28,38 @@ namespace Com.MrIT.DataRepository
             return record;
         }
 
-        public int GetUserCountByEmail(string email, string userType, string fullName = "")
+        public int GetUserCountByEmail(string email, string userType)
         {
-            var record = entities.Count(e => e.Email.ToLower() == email.ToLower() && (fullName == "" || e.Name == fullName) && e.Active == true && e.SystemActive == true);
+            if(userType == "B")
+            {
+                var record = entities.Count(e => e.Email.ToLower() == email.ToLower() && e.IsBusiness == true && e.Active == true && e.SystemActive == true);
 
-            return record;
+                return record;
+            }
+            else
+            {
+                var record = entities.Count(e => e.Email.ToLower() == email.ToLower() && e.IsBusiness == false && e.Active == true && e.SystemActive == true);
+
+                return record;
+            }
+            
+        }
+
+        public int GetUserCountByMobileNo(string mobileNo, string userType)
+        {
+            if (userType == "B")
+            {
+                var record = entities.Count(e => e.MobileNo == mobileNo && e.IsBusiness == true && e.Active == true && e.SystemActive == true);
+
+                return record;
+            }
+            else
+            {
+                var record = entities.Count(e => e.MobileNo == mobileNo && e.IsBusiness == false  && e.Active == true && e.SystemActive == true);
+
+                return record;
+            }
+
         }
 
         public SysUser GetSysUserByID(int id)

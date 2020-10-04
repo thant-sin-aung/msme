@@ -12,6 +12,8 @@ namespace Com.MrIT.DBEntities
         public DateTime ExpiredOn { get; set; }
         public int SysUserId { get; set; }
 
+
+        [ForeignKey("SysUserId")]
         public virtual SysUser SysUser { get; set; }
     }
 }

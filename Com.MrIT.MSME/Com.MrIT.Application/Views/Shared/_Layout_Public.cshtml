@@ -84,17 +84,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
-        <!-- Back to top button -->
-        <a id="button"></a>
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-dark navbar-danger">
+        <div class="header-mid">
             <div class="container">
-                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                    <img src="~/themes/dist/img/AllLiveUp_Logo.jpeg" alt="All Live Up" class="brand-image img-circle elevation-3"
-                         style="opacity: .8">
-                    <span class="brand-text font-weight-light">All Live Up</span>
-                </a>
+                <div class="row" style="margin:10px;">
+                    <div class="col-md-2 text-center hidden-xs">
+                        <div class="logo">
+                            <a href="https://msmewebportal.gov.mm"><img src="https://msmewebportal.gov.mm/rtad/assets/images/moi_logo.png" style="height:100px; width:100px; object-fit:scale-down; margin-top:15px;" class="img-responsive lazyload" alt=""></a>
+                        </div>
+                    </div>
 
+                    <div class="col-md-8 text-center logo_title">
+
+
+                        <h4 class="col-xs-12 text-uppercase">
+                            @SharedLocalizer["THE REPUBLIC OF THE UNION OF MYANMAR"]
+                        </h4>
+                        <h2 class="col-xs-12 text-uppercase">
+                            @SharedLocalizer["MINISTRY OF PLANNING, FINANCE AND INDUSTRY"]
+                        </h2>
+                        <h3 class="col-xs-12">@SharedLocalizer["Department of Small and Medium Enterprises Development"]</h3>
+
+
+                    </div>
+                    <div class="col-md-2 text-center hidden-xs">
+                        <a href="https://msmewebportal.gov.mm"><img src="https://msmewebportal.gov.mm/rtad/assets/images/sme_logo.png" class="img-responsive lazyload" alt="" style="padding-top: 7px;"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-dark navbar-primary">
+            <div class="container">
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -103,14 +123,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Left navbar links -->
                     <ul class="navbar-nav text-bold">
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Home")" class="nav-link text-white">@SharedLocalizer["HOME"]</a>
+                            <a href="@Url.Action("Index","Home")" class="nav-link text-white">@SharedLocalizer["HOME"]</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("Listing", "Challenges")" class="nav-link text-white">@SharedLocalizer["CHALLENGE"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "FAQs")" class="nav-link text-white">@SharedLocalizer["FAQ"]</a>
-                        </li>
+
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle  text-white">
                                 @SharedLocalizer["ABOUT"]
@@ -120,42 +135,74 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li><a href="#" class="dropdown-item">@SharedLocalizer["Brief History"]</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle  text-white">
+                                @SharedLocalizer["POLICY & LAW"]
+                            </a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Small and Medium Enterprise Development Policy"]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Small and Medium Enterprise Development Law"]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Small and Medium Enterprise Development Rule"]</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle  text-white">
+                                @SharedLocalizer["HEAD OFFICE & BRANCHES"]
+                            </a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["15 States/ Region & 39 Districts"]</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle  text-white">
+                                @SharedLocalizer["REGISTRAION"]
+                            </a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Registration Procedures"]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Requirements for Registration"]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Requirements for Payment with \"MPU\""]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Requirements for Payment with \"Visa, Master, JCB and UnionPay\""]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["Requirements for Payment at Myanmar Economic Bank"]</a></li>
+                                <li><a href="#" class="dropdown-item">@SharedLocalizer["FAQs"]</a></li>
+                                <li><a href="@Url.Action("Register","Users")" class="dropdown-item">@SharedLocalizer["To apply Registration"]</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-white">@SharedLocalizer["CONTACT"]</a>
+                        </li>
                         @{
-                            if (Context.Session.GetString("UserID") == null)
+                            if (ViewBag.Login == null)
                             {
                                 <li class="nav-item">
-                                    <a href="@Url.Action("SignIn", "Users")" class="nav-link text-white">@SharedLocalizer["SIGN IN/UP"]</a>
+                                    <a href="@Url.Action("SignIn","Users")" class="nav-link text-white">@SharedLocalizer["LOGIN"]</a>
                                 </li>
                             }
                             else
                             {
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Listing", "DailyRecords")" class="nav-link text-white">@SharedLocalizer["DAILY RECORDS"]</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Listing", "ChallengeRegistrations")" class="nav-link text-white">@SharedLocalizer["REGISTERED CHLLENGES"]</a>
-                                </li>
                                 <li class="nav-item dropdown">
-                                    <a id="dropdownMyAccount" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-white">
-                                        @SharedLocalizer["SETTING"]
+                                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle  text-white">
+                                        @SharedLocalizer["MY ACCOUNT"]
                                     </a>
-                                    <ul aria-labelledby="dropdownAccountSetting" class="dropdown-menu border-0 shadow">
-                                        <li><a href="@Url.Action("Profile", "Users")" class="dropdown-item">@SharedLocalizer["MY ACCOUNT"]</a></li>
-                                        <li><a href="@Url.Action("SignOut", "Users")" class="dropdown-item">@SharedLocalizer["LOGOUT"]</a></li>
+                                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                        <li><a href="#" class="dropdown-item">@SharedLocalizer["Notification"]</a></li>
+                                        <li><a href="@Url.Action("Listing","Enterprise")" class="dropdown-item">@SharedLocalizer["My Enterprises"]</a></li>
+                                        <li><a href="#" class="dropdown-item">@SharedLocalizer["Edit Profile"]</a></li>
                                     </ul>
                                 </li>
                             }
                         }
+
                     </ul>
+
+
                 </div>
 
                 <!-- Right navbar links-->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 
                     <li class="nav-item">
-                        @await Html.PartialAsync("_SelectCurrencyPartial")
+                        @await Html.PartialAsync("_SelectLanguagePartial")
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -167,7 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"> @ViewData["Title"]</h1>
+                            <h1 class="m-0 text-dark"> @*@ViewData["Title"]*@</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
