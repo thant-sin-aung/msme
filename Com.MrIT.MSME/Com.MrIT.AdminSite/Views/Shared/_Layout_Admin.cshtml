@@ -42,7 +42,7 @@
             <a href="#" class="brand-link">
                 @*<img src="~/themes/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">*@
-                <span class="brand-text font-weight-light">MSME Web Portal </span>
+                <span class="brand-text font-weight-light">MSME Web Portal - Admin </span>
             </a>
 
             <!-- Sidebar -->
@@ -62,35 +62,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
     with font-awesome or any other icon font library -->
-                        @*<li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                    Dashboard
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="./index.html" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Dashboard v1</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="./index2.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Dashboard v2</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="./index3.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Dashboard v3</p>
-                    </a>
-                </li>
-            </ul>
-        </li>*@
+                      
                         <li class="nav-item">
                             <a href="@Url.Action("Index","Home")" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -116,82 +88,114 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="@Url.Action("Index","Home")" class="nav-link">
+                                <i class="nav-icon fas fa-money-bill"></i>
+                                <p>
+                                    Confirm Payment
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-object-group"></i>
                                 <p>
-                                    CRM
+                                    Enterprise List
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="@Url.Action("Listing","Challenges")" class="nav-link">
-                                        &nbsp;&nbsp;<i class="fas fa-list-ul nav-icon"></i>
-                                        <p>Approval Task</p>
+                                        &nbsp;&nbsp;<i class="fas fa-registered nav-icon"></i>
+                                        <p>Registered Enterprises</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("Create","Challenges")" class="nav-link">
-                                        &nbsp;&nbsp;<i class="fas fa-plus-square nav-icon"></i>
-                                        <p>Challenge Create</p>
+                                        &nbsp;&nbsp;<i class="fas fa-newspaper nav-icon"></i>
+                                        <p>Unregistered Enterprises</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Create","Challenges")" class="nav-link">
+                                        &nbsp;&nbsp;<i class="fas fa-upload nav-icon"></i>
+                                        <p>Upload Enterprises</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-flag-checkered"></i>
+                                <i class="nav-icon fas fa-sms"></i>
                                 <p>
-                                    Notification Management
+                                    Send Notification
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-user-tie nav-icon"></i>
-                                        <p>
-                                            &nbsp;Manage Staff
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Listing","Challenges")" class="nav-link">
+                                        &nbsp;&nbsp;<i class="fas fa-solar-panel nav-icon"></i>
+                                        <p>Events Invitation</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("StaffListing","Users")" class="nav-link">
-                                                &nbsp;&nbsp;<i class="fas fa-list-ul nav-icon"></i>
-                                                <p>Staff Listing</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("StaffCreate","Users")" class="nav-link">
-                                                &nbsp;&nbsp;<i class="fas fa-user-plus nav-icon"></i>
-                                                <p>Staff Create</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-user nav-icon"></i>
-                                        <p>
-                                            &nbsp;Manage Customer
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Create","Challenges")" class="nav-link">
+                                        &nbsp;&nbsp;<i class="fas fa-info-circle nav-icon"></i>
+                                        <p>Share Information</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("CustomerListing","Users")" class="nav-link b">
-                                                &nbsp;&nbsp;<i class="fas fa-list-ul nav-icon"></i>
-                                                <p>Customer Listing</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("CustomerCreate","Users")" class="nav-link">
-                                                &nbsp;&nbsp;<i class="fas fa-user-plus nav-icon"></i>
-                                                <p>Customer Create</p>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-circle"></i>
+                                <p>
+                                    Manage Users
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Listing","ChallengeRegions")" class="nav-link">
+                                        &nbsp;<i class="fas fa-users nav-icon"></i>
+                                        <p>Enterprise Users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Listing","ChallengeRegions")" class="nav-link">
+                                        &nbsp;<i class="fas fa-user-shield nav-icon"></i>
+                                        <p>Admin Users</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    Report
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Listing","ChallengeRegions")" class="nav-link">
+                                        &nbsp;<i class="fas fa-list nav-icon"></i>
+                                        <p>Application</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Listing","ChallengeRegions")" class="nav-link">
+                                        &nbsp;<i class="fas fa-list nav-icon"></i>
+                                        <p>Enterprise</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Listing","ChallengeRegions")" class="nav-link">
+                                        &nbsp;<i class="fas fa-list nav-icon"></i>
+                                        <p>Enterprise Users</p>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -199,43 +203,30 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    Manage
+                                    Setting
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Listing","ChallengeRegions")" class="nav-link">
-                                        &nbsp;<i class="fas fa-globe-asia nav-icon"></i>
-                                        <p>Manage Challenge Region</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="@Url.Action("Listing","Activities")" class="nav-link">
-                                        &nbsp;<i class="fas fa-running nav-icon"></i>
-                                        <p>Manage Activity</p>
+                                        &nbsp;<i class="fas fa-stream nav-icon"></i>
+                                        <p>Manage Approval</p>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="@Url.Action("Listing","Entitlements")" class="nav-link">
-                                        &nbsp;<i class="fas fa-award nav-icon"></i>
-                                        <p>Manage Entitlement</p>
+                                        &nbsp;<i class="fas fa-link nav-icon"></i>
+                                        <p>Manage Outsource API</p>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Listing","DeliveryRates")" class="nav-link">
-                                        &nbsp;<i class="fas fa-shipping-fast nav-icon"></i>
-                                        <p>Manage Delivery Rate</p>
+                                    <a href="@Url.Action("Listing","Entitlements")" class="nav-link">
+                                        &nbsp;<i class="fas fa-book nav-icon"></i>
+                                        <p>Manage Application Type</p>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="@Url.Action("Listing","FAQs")" class="nav-link">
                                         &nbsp;<i class="fas fa-question-circle nav-icon"></i>
